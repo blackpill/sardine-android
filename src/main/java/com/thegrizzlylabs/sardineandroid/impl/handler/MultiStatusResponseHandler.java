@@ -23,8 +23,10 @@ public class MultiStatusResponseHandler extends ValidatingResponseHandler<Multis
         if (body == null) {
             throw new SardineException("No entity found in response", response.code(), response.message());
         }
+        Multistatus status = getMultistatus(body.byteStream());
+        body.close();
 
-        return getMultistatus(body.byteStream());
+        return status;
     }
 
     /**
